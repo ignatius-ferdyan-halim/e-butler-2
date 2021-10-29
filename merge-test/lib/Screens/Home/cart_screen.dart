@@ -1,15 +1,16 @@
+import 'package:ebutler/providers/orders.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import '/providers/cart.dart' show Cart;
 //show buat ngasi tau cm butuh Cart class
 import '/widgets/cart_item.dart';
-import '/providers/orders.dart';
 import 'order_screen.dart';
 
 class CartScreen extends StatelessWidget {
+  final OrderItem order;
   static const routeName = '/cart';
 
-  const CartScreen({Key key}) : super(key: key);
+  const CartScreen({Key key, this.order}) : super(key: key);
   @override
   Widget build(BuildContext context) {
     final cart = Provider.of<Cart>(context);
@@ -28,7 +29,7 @@ class CartScreen extends StatelessWidget {
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: <Widget>[
                   const Text(
-                    'Total',
+                    'total',
                     style: TextStyle(fontSize: 20),
                   ),
                   const Spacer(),
@@ -46,14 +47,28 @@ class CartScreen extends StatelessWidget {
                         color: Theme.of(context).primaryColor,
                       ),
                     ),
-                    onPressed: () {
-                      Provider.of<Orders>(context, listen: false).addOrder(
-                        cart.items.values.toList(),
-                        cart.totalAmount,
-                      );
-                      cart.clear();
-                      Navigator.of(context).pushNamed(OrderScreen.routeName);
-                    },
+                    onPressed: cart.totalAmount > 0
+                        ? () {
+                            Provider.of<Orders>(context, listen: false)
+                                .addOrder(
+                              cart.items.values.toList(),
+                              cart.totalAmount,
+                            );
+                            cart.clear();
+                            Navigator.of(context)
+                                .pushNamed(OrderScreen.routeName);
+                          }
+                        : () {
+                            ScaffoldMessenger.of(context).showSnackBar(
+                              const SnackBar(
+                                content: Text(
+                                  'Please Add an Item First',
+                                  textAlign: TextAlign.center,
+                                ),
+                                duration: Duration(seconds: 1),
+                              ),
+                            );
+                          },
                   ),
                 ],
               ),

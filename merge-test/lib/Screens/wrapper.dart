@@ -1,4 +1,4 @@
-import 'package:ebutler/Model/user.dart';
+import 'package:ebutler/providers/user.dart';
 import 'package:ebutler/Screens/Authenticate/authenticate.dart';
 
 import 'package:ebutler/Screens/Home/products_overview_screen.dart';

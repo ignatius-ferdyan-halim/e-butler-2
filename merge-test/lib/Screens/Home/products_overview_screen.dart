@@ -1,14 +1,14 @@
+import 'package:ebutler/providers/cart.dart';
+import 'package:ebutler/widgets/cart_item.dart' as odi;
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 // import 'package:provider/provider.dart';
-
 import '/Services/auth.dart';
 import '/widgets/products_grid.dart';
-import '/providers/cart.dart';
 import '/Screens/Home/cart_screen.dart';
 import '/widgets/app_drawer.dart';
 import '/widgets/badge.dart';
-import '/Model/user.dart';
+import '../../providers/user.dart';
 
 // import '/providers/products.dart';
 
@@ -27,6 +27,7 @@ class ProductsOverviewScreen extends StatefulWidget {
 class _ProductsOverviewScreenState extends State<ProductsOverviewScreen> {
   // var _showOnlyFavorites = false;
   final AuthService _auth = AuthService();
+  final odi.CartItem cart = const odi.CartItem();
 
   @override
   Widget build(BuildContext context) {
@@ -71,18 +72,15 @@ class _ProductsOverviewScreenState extends State<ProductsOverviewScreen> {
             //   ],
             // ),
             Consumer<Cart>(
-              builder: (_, cart, ch) => Badge(
-                child: ch,
-                value: cart.itemCount.toString(),
-              ),
+              builder: (_, cart, ch) =>
+                  Badge(child: ch, value: cart.itemCount.toString()),
               child: IconButton(
-                icon: const Icon(
-                  Icons.shopping_cart,
-                ),
-                onPressed: () {
-                  Navigator.of(context).pushNamed(CartScreen.routeName);
-                },
-              ),
+                  icon: const Icon(
+                    Icons.shopping_cart,
+                  ),
+                  onPressed: () {
+                    Navigator.of(context).pushNamed(CartScreen.routeName);
+                  }),
             )
           ],
         ),

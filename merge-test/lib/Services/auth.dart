@@ -1,4 +1,4 @@
-import 'package:ebutler/Model/user.dart';
+import 'package:ebutler/providers/user.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 
 class AuthService {

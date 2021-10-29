@@ -1,4 +1,4 @@
-import 'package:ebutler/Model/user.dart';
+import 'package:ebutler/providers/user.dart';
 import 'package:ebutler/Screens/wrapper.dart';
 import 'package:ebutler/Services/auth.dart';
 import 'package:flutter/material.dart';
